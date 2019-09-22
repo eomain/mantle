@@ -1,0 +1,14 @@
+{
+  "name": "clover",
+  "version": "1.0.0",
+  "description": "epub publisher",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "eomain",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^6.0.10"
+  }
+}
