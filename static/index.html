@@ -1,10 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
+        <link rel="stylesheet" href="style/w3.css">
+        <link rel="stylesheet" href="style/w3-theme-grey.css">
+        <link rel="stylesheet" href="style/main.css">
+        <script type="text/javascript" src="script/w3.js"></script>
         <meta charset="utf-8">
-        <title></title>
+        <title>Mantle</title>
+
+        <script type="text/javascript" src="main.js"></script>
+        <script type="text/javascript" src="script/reader.js"></script>
+        <script type="text/javascript" src="script/book.js"></script>
+        <script type="text/javascript" src="script/ipc.js">
+
+        </script>
     </head>
     <body>
+        <div id="navbar" class="w3-bar w3-theme-d5 w3-hide">
+        </div>
 
+        <div id="tabsect" class="w3-display-container w3-hide">
+            <iframe allow id="frame" src="" width="100%" height="100%"></iframe>
+            <button class="w3-button w3-display-left" type="button" onclick="mantle.reader.prev()">&#10094;</button>
+            <button class="w3-button w3-display-right" type="button" onclick="mantle.reader.next()">&#10095;</button>
+        </div>
+
+        <div id="infobar" class="w3-display-bottomright w3-bar w3-theme-d5 w3-hide">
+            <button id="pagecount" class="w3-bar-item w3-button w3-right">
+                {{current}}:{{max}}
+            </button>
+        </div>
+
+        <div id="default" class="w3-container w3-theme-d4">
+            <div class="w3-display-middle">
+                <button id="opener" class="w3-button w3-circle w3-theme-d4" onclick="mantle.ipc.open()">+</button>
+                <div id="loader" class="w3-hide"></div>
+            </div>
+        </div>
     </body>
 </html>

@@ -1,5 +1,5 @@
 {
-  "name": "clover",
+  "name": "mantle",
   "version": "1.0.0",
   "description": "epub publisher",
   "main": "src/main.js",
@@ -9,6 +9,12 @@
   "author": "eomain",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^6.0.10"
+    "electron": "^6.1.12"
+  },
+  "dependencies": {
+    "jszip": "^3.2.2",
+    "tmp": "^0.2.1",
+    "uuid": "^3.3.3",
+    "xml-js": "^1.6.11"
   }
 }
