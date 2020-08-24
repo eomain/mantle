@@ -31,8 +31,6 @@ class Manifest {
             this.items[i.id] = i;
             this.itemrefs.set(i.href, i.id);
         }
-
-        console.log(this.itemrefs);
     }
 
     getItem(id) {
