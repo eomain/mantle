@@ -11,11 +11,12 @@
         <script type="text/javascript" src="main.js"></script>
         <script type="text/javascript" src="script/reader.js"></script>
         <script type="text/javascript" src="script/book.js"></script>
+        <script type="text/javascript" src="script/settings.js"></script>
         <script type="text/javascript" src="script/ipc.js">
 
         </script>
     </head>
-    <body>
+    <body class="w3-theme-l3">
         <div id="navbar" class="w3-bar w3-theme-d5 w3-hide">
         </div>
 
@@ -25,17 +26,22 @@
             <button class="w3-button w3-display-right" type="button" onclick="mantle.reader.next()">&#10095;</button>
         </div>
 
-        <div id="infobar" class="w3-display-bottomright w3-bar w3-theme-d5 w3-hide">
-            <button id="pagecount" class="w3-bar-item w3-button w3-right">
+        <div id="infobar" class="w3-display-bottomright w3-bar w3-theme-d5 w3-hide w3-padding-16">
+            <div class="w3-container">
+                <input id="slider" class="mantle-slider" type="range" value="1" min="1" max="1" oninput="mantle.info.range()">
+            </div>
+            <div id="pagecount" class="w3-bar-item w3-right">
                 {{current}}:{{max}}
-            </button>
+            </div>
         </div>
 
         <div id="default" class="w3-container w3-theme-d4">
             <div class="w3-display-middle">
-                <button id="opener" class="w3-button w3-circle w3-theme-d4" onclick="mantle.ipc.open()">+</button>
+                <button id="opener" class="w3-button w3-large w3-circle w3-theme-d4" onclick="mantle.ipc.open()">+</button>
                 <div id="loader" class="w3-hide"></div>
             </div>
         </div>
+
+        <div w3-include-html="settings.html" id="settings" class="w3-modal"></div>
     </body>
 </html>

@@ -16,15 +16,15 @@ ipcRenderer.on('book-display', (event, req) => {
     mantle.book.display(req.id, req.xhtml);
 });
 
-ipcRenderer.on('nav-update', (event, arg) => {
-    if (!arg)
+ipcRenderer.on('nav-update', (event, books) => {
+    if (!books)
         return;
     mantle.tab.clear();
-    if (arg.length > 0) {
-        arg.forEach(([id, title], i) => {
+    if (books.length > 0) {
+        books.forEach(([id, title], i) => {
             mantle.tab.append(id, title);
         });
-
+        mantle.tab.opener();
     } else {
         mantle.tab.hide();
     }
@@ -52,4 +52,8 @@ ipcRenderer.on('reader-fullscreen', (event, value) => {
 
 ipcRenderer.on('index', event => {
     mantle.index();
+});
+
+ipcRenderer.on('settings', event => {
+    mantle.settings.open();
 });

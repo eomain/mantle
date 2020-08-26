@@ -1,7 +1,7 @@
 {
   "name": "mantle",
   "version": "1.0.0",
-  "description": "epub publisher",
+  "description": "e-book reading application",
   "main": "src/main.js",
   "scripts": {
     "start": "electron ."

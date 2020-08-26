@@ -11,6 +11,11 @@ mantle.reader = {
     /* If the reader is set to fullscreen */
     isFullScreen: false,
 
+    fs: {
+        nav: false,
+        info: false
+    },
+
     /* Display the XHTML page */
     display: function (xhtml) {
         this.frame.src = xhtml;
@@ -101,8 +106,14 @@ mantle.reader = {
     /* Set the reader to fullscreen mode */
     fullscreen: function (value) {
         if (value) {
-            mantle.tab.hide();
-            mantle.info.hide();
+            if (!this.fs.nav)
+                mantle.tab.hide();
+            else
+                mantle.tab.show();
+            if (!this.fs.info)
+                mantle.info.hide();
+            else
+                mantle.info.show();
         } else {
             mantle.tab.show();
             mantle.info.show();

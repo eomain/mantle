@@ -61,6 +61,18 @@ const TEMPLATE = [
                 click: () => {
                     app.send('reader-end');
                 }
+            },
+
+            {
+                type: 'separator'
+            },
+
+            {
+                label: 'Settings',
+                accelerator: 'CmdOrCtrl+M',
+                click: () => {
+                    app.send('settings');
+                }
             }
         ]
     },
@@ -69,11 +81,10 @@ const TEMPLATE = [
         label: 'View',
         submenu: [
             {
-                label: 'Full screen',
+                label: 'Fullscreen',
                 accelerator: 'F11',
                 click: () => {
                     app.toggleFullscreen();
-                    app.send('reader-fullscreen');
                 }
             }
         ]
