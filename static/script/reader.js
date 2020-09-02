@@ -12,8 +12,8 @@ mantle.reader = {
     isFullScreen: false,
 
     fs: {
-        nav: false,
-        info: false
+        nav:  true,
+        info: true
     },
 
     /* Display the XHTML page */

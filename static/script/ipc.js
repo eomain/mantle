@@ -25,6 +25,7 @@ ipcRenderer.on('nav-update', (event, books) => {
             mantle.tab.append(id, title);
         });
         mantle.tab.opener();
+        mantle.info.show();
     } else {
         mantle.tab.hide();
     }

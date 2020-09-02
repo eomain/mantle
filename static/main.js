@@ -119,6 +119,7 @@ mantle.info = {
 
     /* Show the info bar */
     show: function () {
+        this.update(this.slider.value, this.slider.max);
         w3.addClass('#infobar', 'w3-show');
     },
 

@@ -11,20 +11,20 @@ mantle.settings = {
 
     fullscreen: {
         nav: function () {
+            let nav = document.getElementById('settings-navbar');
+            let value = nav.options[nav.selectedIndex].value == 'yes';
+            mantle.reader.fs.nav = value;
             if (!mantle.reader.isFullScreen)
                 return;
-            let nav = document.getElementById('settings-navbar');
-            let value = nav.selectedIndex != 0;
-            mantle.reader.fs.nav = value;
             mantle.reader.fullscreen(true);
         },
 
         info: function () {
+            let nav = document.getElementById('settings-infobar');
+            let value = nav.options[nav.selectedIndex].value == 'yes';
+            mantle.reader.fs.info = value;
             if (!mantle.reader.isFullScreen)
                 return;
-            let nav = document.getElementById('settings-infobar');
-            let value = nav.selectedIndex != 0;
-            mantle.reader.fs.info = value;
             mantle.reader.fullscreen(true);
         }
     }
