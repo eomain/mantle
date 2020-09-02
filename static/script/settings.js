@@ -10,18 +10,14 @@ mantle.settings = {
     },
 
     fullscreen: {
-        nav: function () {
-            let nav = document.getElementById('settings-navbar');
-            let value = nav.options[nav.selectedIndex].value == 'yes';
+        nav: function (value) {
             mantle.reader.fs.nav = value;
             if (!mantle.reader.isFullScreen)
                 return;
             mantle.reader.fullscreen(true);
         },
 
-        info: function () {
-            let nav = document.getElementById('settings-infobar');
-            let value = nav.options[nav.selectedIndex].value == 'yes';
+        info: function (value) {
             mantle.reader.fs.info = value;
             if (!mantle.reader.isFullScreen)
                 return;
