@@ -20,6 +20,7 @@ let application = {
 
     show: function () {
         this.window.once('ready-to-show', () => {
+            this.window.maximize();
             this.window.show();
         });
     },
