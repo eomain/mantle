@@ -16,37 +16,46 @@ const reader = {
         }).catch(e => {
             // TODO
         });
+    },
+
+    openAll: function (paths) {
+        if (paths.length > 0) {
+            app.send('book-load');
+            paths.forEach(book => this.open(book));
+        }
+    },
+
+    close: function (id) {
+        books.remove(id);
+        app.send('nav-update', books.entries());
+        if (books.count() == 0)
+            app.send('index');
+        else
+            app.send('book-read', books.bookPage(books.last(), 1));
+    },
+
+    page: function (id, page) {
+        app.send('book-display', books.bookPage(id, page));
     }
 };
 
 ipcMain.on('epub-open', (event, books) => {
-    books.forEach(book => reader.open(book));
+    reader.openAll(books);
 });
 
 ipcMain.on('epub-close', (event, id) => {
-    books.remove(id);
-    app.send('nav-update', books.entries());
-    if (books.count() == 0)
-        app.send('index');
-    else
-        app.send('book-read', books.bookPage(books.last(), 1));
+    reader.close(id);
 });
 
 ipcMain.on('epub-page', (event, req) => {
-    let id = req.id;
-    let page = req.page;
-    app.send('book-display', books.bookPage(id, page));
+    reader.page(req.id, req.page);
 });
 
-app.lock((argv) => {
+app.lock(argv => {
     // Open books in current window on second instance
-    argv.slice(2).forEach(book => reader.open(book));
+    reader.openAll(argv.slice(2));
 });
 
 app.run(() => {
-    const argv = process.argv.slice(2);
-    if (argv.length > 0) {
-        app.send('book-load');
-        argv.forEach(book => reader.open(book));
-    }
+    reader.openAll(process.argv.slice(2));
 });
