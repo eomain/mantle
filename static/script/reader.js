@@ -47,6 +47,7 @@ mantle.reader = {
                     mantle.reader.timeid.push(window.setTimeout(async function () {
                         body.style.cursor = 'none';
                         mantle.reader.timeid.forEach(id => window.clearTimeout(id));
+                        mantle.reader.timeid.length = 0;
                     }, 2000));
                 })();
             };
