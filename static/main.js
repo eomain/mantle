@@ -21,8 +21,7 @@ mantle.ipc = {
         let object = await this.select();
         if (object.canceled)
             return;
-        w3.addClass('#opener', 'w3-hide');
-        w3.removeClass('#loader', 'w3-hide');
+        mantle.loader.show();
         ipcRenderer.send('epub-open', object.filePaths);
     },
 
@@ -35,11 +34,23 @@ mantle.ipc = {
 
 /* Displays the startup "index" page. */
 mantle.index = function () {
-    w3.removeClass('#opener', 'w3-hide');
-    w3.addClass('#loader', 'w3-hide');
+    mantle.doc.title();
+    mantle.loader.hide();
     w3.removeClass('#tabsect', 'w3-show');
     w3.removeClass('#default', 'w3-hide');
     mantle.info.hide();
+};
+
+mantle.loader = {
+    show: function () {
+        w3.addClass('#opener', 'w3-hide');
+        w3.removeClass('#loader', 'w3-hide');
+    },
+
+    hide: function () {
+        w3.removeClass('#opener', 'w3-hide');
+        w3.addClass('#loader', 'w3-hide');
+    }
 };
 
 /* Used to manage the books navbar and tabs. */
@@ -141,6 +152,15 @@ mantle.info = {
     /* Set the page to the slider range value */
     range: function () {
         mantle.reader.goto(parseInt(this.slider.value));
+    }
+};
+
+mantle.doc = {
+    title: function (title) {
+        if (!title)
+            document.title = 'Mantle';
+        else
+            document.title = title + ' - Mantle';
     }
 };
 

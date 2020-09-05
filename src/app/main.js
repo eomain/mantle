@@ -10,6 +10,7 @@ let application = {
         this.window = new BrowserWindow({
             center: true,
             show: false,
+            icon: path.join(app.getAppPath(), 'static', 'asset', 'icon', 'icon.png'),
             webPreferences: {
                 devTools: true,
                 nodeIntegration: true,
@@ -18,10 +19,12 @@ let application = {
         });
     },
 
-    show: function () {
+    show: function (ready) {
         this.window.once('ready-to-show', () => {
             this.window.maximize();
             this.window.show();
+            if (ready)
+                ready();
         });
     },
 
@@ -39,23 +42,43 @@ let application = {
         this.send('reader-fullscreen', flag);
     },
 
+    lock: function (onlock) {
+        this.onlock = onlock;
+    },
+
+    run: function (ready) {
+
+        if (!app.requestSingleInstanceLock())
+            this.quit();
+
+        app.on('window-all-closed', () => {
+            this.quit();
+        });
+
+        app.on('second-instance', (event, cmd, dir) => {
+            if (this.window) {
+                if (this.window.isMinimized())
+                    this.window.restore();
+                this.window.focus();
+                if (this.onlock)
+                    this.onlock(cmd);
+            }
+        });
+
+        app.on('ready', () => {
+            const { menu } = require('./menu');
+            menu();
+            this.init();
+            this.load(path.join(app.getAppPath(), 'static', 'index.html'));
+            this.show(ready);
+        });
+    },
+
     quit: function () {
         books.clear();
         app.quit();
     }
 };
-
-app.on('window-all-closed', () => {
-    application.quit();
-});
-
-app.on('ready', () => {
-    const { menu } = require('./menu');
-    menu();
-    application.init();
-    application.load(path.join(app.getAppPath(), 'static', 'index.html'));
-    application.show();
-});
 
 module.exports = {
     app: application

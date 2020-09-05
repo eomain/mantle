@@ -1,7 +1,7 @@
 'use strict';
 
 ipcRenderer.on('book-add', (event, req) => {
-    mantle.book.open(req.id, req.page, req.max);
+    mantle.book.open(req.id, req.name, req.page, req.max);
 });
 
 ipcRenderer.on('book-read', (event, req) => {
@@ -14,6 +14,10 @@ ipcRenderer.on('book-open', event => {
 
 ipcRenderer.on('book-display', (event, req) => {
     mantle.book.display(req.id, req.xhtml);
+});
+
+ipcRenderer.on('book-load', event => {
+    mantle.loader.show();
 });
 
 ipcRenderer.on('nav-update', (event, books) => {

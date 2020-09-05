@@ -50,10 +50,13 @@ class Books {
         let epub = this.epubs.get(id);
         if (!epub)
             return;
-        let spine = epub.getPackage().getSpine();
+        let pkg = epub.getPackage();
+        let spine = pkg.getSpine();
+        let data = pkg.getMetadata();
 
         return {
             id: id,
+            name: data.getTitle(),
             page: 1,
             max: spine.length()
         };

@@ -1,8 +1,9 @@
 'use strict';
 
 class Book {
-    constructor(id, page, max) {
+    constructor(id, name, page, max) {
         this.id = id;
+        this.name = name;
         this.current = page;
         this.max = max;
         this.scrollX = 0;
@@ -62,8 +63,8 @@ class Book {
 mantle.book = {
     books: new Map(),
 
-    open: function (id, page, max) {
-        this.books.set(id, new Book(id, page, max));
+    open: function (id, name, page, max) {
+        this.books.set(id, new Book(id, name, page, max));
     },
 
     read: function (id) {

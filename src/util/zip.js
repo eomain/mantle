@@ -32,9 +32,13 @@ async function writeZip(zip, dir) {
 
 module.exports = {
     open: async function (epub, dir) {
-        let data = await read(epub);
-        let jzip = new JSZip();
-        let zip = await jzip.loadAsync(data);
-        await writeZip(zip, dir);
+        try {
+            let data = await read(epub);
+            let jzip = new JSZip();
+            let zip = await jzip.loadAsync(data);
+            await writeZip(zip, dir);
+        } catch (e) {
+            return new Error('cannot open zip file');
+        }
     }
 };

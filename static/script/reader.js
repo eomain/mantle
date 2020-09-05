@@ -16,9 +16,43 @@ mantle.reader = {
         info: true
     },
 
+    timeid: [],
+
     /* Display the XHTML page */
     display: function (xhtml) {
+        mantle.doc.title(this.book.name);
+
         this.frame.src = xhtml;
+        this.frame.onload = function () {
+            let body = this.contentDocument.body;
+            body.style.cursor = 'none';
+
+            body.onmousedown = function (event) {
+                switch (event.which) {
+                    /* The left mouse button */
+                    case 1:
+                        mantle.reader.prev();
+                        break;
+
+                    /* The right mouse button */
+                    case 3:
+                        mantle.reader.next();
+                        break;
+                }
+            };
+
+            body.onmousemove = function (event) {
+                this.style.cursor = 'pointer';
+                (async function () {
+                    mantle.reader.timeid.push(window.setTimeout(async function () {
+                        body.style.cursor = 'none';
+                        mantle.reader.timeid.forEach(id => window.clearTimeout(id));
+                    }, 2000));
+                })();
+            };
+
+            this.width = body.scrollWidth + 'px';
+        };
         w3.addClass('#default', 'w3-hide');
         w3.addClass('#tabsect', 'w3-show');
 
@@ -46,7 +80,7 @@ mantle.reader = {
             let inner = this.contentWindow.innerHeight;
             //this.contentWindow.document.body.style.zoom = (inner / height);
             this.onload = onload;
-        }
+        };
     },
 
     /* Update the current page */
